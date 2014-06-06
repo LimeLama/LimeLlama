@@ -15,7 +15,7 @@ namespace Service
             string servg = "Test = " + g;
             return servg;
         }
-        public bool CheckLogin(string login, string pass)
+        public int CheckLogin(string login, string pass)
         {
             try
             {
@@ -42,12 +42,12 @@ namespace Service
                         if (val2 == pass)
                         {
                             Console.WriteLine(" user autorized: \n Name {0} \n Password {1}",  val1, val2);
-                            return true;
+                            return 0; //Authorization succeed
                         }
                         else
                         {
                             Console.WriteLine(" autorization faild:  Name {0} \n Password {1}", login, pass);
-                            return false;
+                            return 2; // Wrong password
                         }
                 }
                 else
@@ -59,20 +59,30 @@ namespace Service
             catch (Exception e)
             {
                 Console.WriteLine("autorization error: {0}", e.ToString());
-                return false;
+                return 999; //SQL error
             }
             //finally
             //{
             //    result.Close();
             //    conn.Close();
             //}
-            return true;
+            return 0;
         }
-        public bool AddLogin(string login, string pass)
+        public int AddLogin(string login, string pass)
         {
             try
             {
                 SqlConnection conn = new SqlConnection("server=FARMBOOK\\GAMEDB;User Id ='gm'; Password = '12345'; database=AuthDB");
+                string query = "SELECT * FROM Logins WHERE [Login]=@name";
+
+
+                SqlCommand CheckExistLogincom = new SqlCommand(query, conn);
+                CheckExistLogincom.Parameters.Add("@name", SqlDbType.NVarChar).Value = login;
+                conn.Open();
+                SqlDataReader CheckReader = CheckExistLogincom.ExecuteReader();
+                if (CheckReader.HasRows) { return 1; } //Login exists
+                conn.Close();
+
                 string querymaxid = "Select max(id) from Logins";
                 SqlCommand com = new SqlCommand(querymaxid, conn);
                 conn.Open();
@@ -96,7 +106,20 @@ namespace Service
             {
                 Console.WriteLine("error: {0}", e.ToString());
             }
-            return true;
+            return 0; //Registration succeed
+        }
+
+        public string ErrorDescription(int k)
+        {
+            switch (k)
+            {
+                case 0: return "Operation succeed"; break;
+                case 1: return "Login exists"; break;
+                case 2: return "Wrong password"; break;
+                case 999: return "SQL error, check server console for more information"; break;
+            }
+            return "No error description";
+ 
         }
     }
 }

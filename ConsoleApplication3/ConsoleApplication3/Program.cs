@@ -13,7 +13,7 @@ namespace ConsoleApplication3
         static void Main(string[] args)
         {
             InterfaceClient client = new InterfaceClient();
-            Console.WriteLine(client.AddLogin("Login8", "333"));
+            Console.WriteLine(client.ErrorDescription(client.AddLogin("Login8", "333")));
             Console.ReadLine();
         }
     }

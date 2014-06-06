@@ -25,7 +25,7 @@
   <xs:element name="CheckLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CheckLoginResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="CheckLoginResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +40,21 @@
   <xs:element name="AddLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddLoginResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="AddLoginResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ErrorDescription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="k" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ErrorDescriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ErrorDescriptionResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

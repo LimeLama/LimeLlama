@@ -22,16 +22,22 @@ namespace ConsoleApplication3.ServiceReference1 {
         System.Threading.Tasks.Task<string> testAsync(string g);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/CheckLogin", ReplyAction="http://tempuri.org/Interface/CheckLoginResponse")]
-        bool CheckLogin(string login, string pass);
+        int CheckLogin(string login, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/CheckLogin", ReplyAction="http://tempuri.org/Interface/CheckLoginResponse")]
-        System.Threading.Tasks.Task<bool> CheckLoginAsync(string login, string pass);
+        System.Threading.Tasks.Task<int> CheckLoginAsync(string login, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/AddLogin", ReplyAction="http://tempuri.org/Interface/AddLoginResponse")]
-        bool AddLogin(string login, string pass);
+        int AddLogin(string login, string pass);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/AddLogin", ReplyAction="http://tempuri.org/Interface/AddLoginResponse")]
-        System.Threading.Tasks.Task<bool> AddLoginAsync(string login, string pass);
+        System.Threading.Tasks.Task<int> AddLoginAsync(string login, string pass);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/ErrorDescription", ReplyAction="http://tempuri.org/Interface/ErrorDescriptionResponse")]
+        string ErrorDescription(int k);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/ErrorDescription", ReplyAction="http://tempuri.org/Interface/ErrorDescriptionResponse")]
+        System.Threading.Tasks.Task<string> ErrorDescriptionAsync(int k);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,20 +75,28 @@ namespace ConsoleApplication3.ServiceReference1 {
             return base.Channel.testAsync(g);
         }
         
-        public bool CheckLogin(string login, string pass) {
+        public int CheckLogin(string login, string pass) {
             return base.Channel.CheckLogin(login, pass);
         }
         
-        public System.Threading.Tasks.Task<bool> CheckLoginAsync(string login, string pass) {
+        public System.Threading.Tasks.Task<int> CheckLoginAsync(string login, string pass) {
             return base.Channel.CheckLoginAsync(login, pass);
         }
         
-        public bool AddLogin(string login, string pass) {
+        public int AddLogin(string login, string pass) {
             return base.Channel.AddLogin(login, pass);
         }
         
-        public System.Threading.Tasks.Task<bool> AddLoginAsync(string login, string pass) {
+        public System.Threading.Tasks.Task<int> AddLoginAsync(string login, string pass) {
             return base.Channel.AddLoginAsync(login, pass);
+        }
+        
+        public string ErrorDescription(int k) {
+            return base.Channel.ErrorDescription(k);
+        }
+        
+        public System.Threading.Tasks.Task<string> ErrorDescriptionAsync(int k) {
+            return base.Channel.ErrorDescriptionAsync(k);
         }
     }
 }

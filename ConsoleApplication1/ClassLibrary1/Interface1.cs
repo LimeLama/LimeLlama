@@ -13,9 +13,10 @@ namespace Service
         [OperationContract]
         string test(string g);
         [OperationContract]
-        bool CheckLogin(string login, string pass);
+        int CheckLogin(string login, string pass);
         [OperationContract]
-        bool AddLogin(string login, string pass);
-
+        int AddLogin(string login, string pass);
+        [OperationContract]
+        string ErrorDescription(int k);
     }
 }
